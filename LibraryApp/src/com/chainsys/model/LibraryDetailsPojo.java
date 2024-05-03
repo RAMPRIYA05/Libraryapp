@@ -8,9 +8,9 @@ public class LibraryDetailsPojo {
     public String category;
     public String userPassword;
     public String bookName;
-    public String bookCategory;
+    public int bookCategory;
     public char nextBook;
-    public String purpose;
+    public int purpose;
     public String returnDate;
     
 	public int getUser() {
@@ -44,10 +44,10 @@ public class LibraryDetailsPojo {
 		this.category = category;
 	}
 	
-	public String getBookCategory() {
+	public int getBookCategory() {
 		return bookCategory;
 	}
-	public void setBookCategory(String bookCategory) {
+	public void setBookCategory(int bookCategory) {
 		this.bookCategory = bookCategory;
 	}
 	
@@ -71,10 +71,10 @@ public class LibraryDetailsPojo {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public String getPurpose() {
+	public int getPurpose() {
 		return purpose;
 	}
-	public void setPurpose(String purpose) {
+	public void setPurpose(int purpose) {
 		this.purpose = purpose;
 	}
 	public String getReturnDate() {

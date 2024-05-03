@@ -17,7 +17,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	static LibraryDetailsImplementation libraryDetails = new LibraryDetailsImplementation();
     static LibraryDetailsPojo pojo=new LibraryDetailsPojo();
 	public static  int bookCount;
-	public static String purpose;
+	public static int purpose;
 	public static int age;
 	public static int membershipPackage;
 	public static int newLibraryCardNumber;
@@ -25,7 +25,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	static int fineAmount;
     static int fine;
     static int libraryCardNumber;
-    static String bookCategory;
+    static int bookCategory;
     static int noOfBooksTaken;
     static int user;
     static String bookName;
@@ -41,19 +41,21 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    	 System.out.println(" 1.membership\n 2.non-membership\n");
    	 System.out.println("User(1/2):");
    	 int user=sc.nextInt();
-   	String userString=Integer.toString(user);
-   	 Pattern p=Pattern.compile("^[1-2]$");
-     Matcher m=p.matcher(userString);
-     if(m.find())
-        {
-       	 switch(userString) 
+//   	String userString=Integer.toString(user);
+//   	 Pattern p=Pattern.compile("^[1-2]$");
+//     Matcher m=p.matcher(userString);
+//     if(m.find())
+//        {
+   	 if(user==1||user==2)
+   	 {
+       	 switch(user) 
        	 {
-       	 case "1":
+       	 case 1:
        		 System.out.println("We are happy because you are member of our library");
        		 System.out.println("**************");
        		libraryDetails.cardNumber();
        		 break;
-       	 case "2":
+       	 case 2:
        		 System.out.println("you are non membership of our library.");
        		 System.out.println("You can read books only inside the library.");
        		 System.out.println("if you want to take book to home,you should be a member of our library");
@@ -244,22 +246,24 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 		return userPassword;
 	}
 	@Override
-	public String purpose() {
+	public int purpose() {
    	 Scanner sc=new Scanner(System.in);
  	
    	 System.out.println("Types of person in library:");
    	 System.out.println(" 1.Booktaken\n 2.BookReturn\n 3.Bookreaders inside a library");
    	 System.out.println("Choose anyone option(1/2/3):");
-   	 purpose=sc.next();
-   	 sc.nextLine();
+   	 purpose=sc.nextInt();
+   	// sc.nextLine();
    	 //System.out.println("purpose:"+purpose);
-   	 Pattern p=Pattern.compile("^[1-3]+$");
-     Matcher m=p.matcher(purpose);
-     if(m.find())
-     {
+//   	 Pattern p=Pattern.compile("^[1-3]+$");
+//     Matcher m=p.matcher(purpose);
+//     if(m.find())
+//     {
+   	 if(purpose==1||purpose==2||purpose==3) 
+   	 {
    	 switch(purpose)
    	 {
-   	 case "1":
+   	 case 1:
    		
    		 libraryDetails.category();
    		 libraryDetails.noOfBooksTakenDetails();
@@ -267,7 +271,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
       	 libraryDetails.todayDate();
       	 libraryDetails.nextBookDetails();
    		 break;
-   	 case "2":
+   	 case 2:
    		 System.out.println("Name of the book:");
    		 String book=sc.nextLine();
    		 System.out.println("book:"+book);
@@ -278,7 +282,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    		 libraryDetails.returnDate();
    		 System.out.println("Book returned");
    		 break;
-   	 case "3":
+   	 case 3:
    		 libraryDetails.category();
    		 System.out.println("They take books for reading inside the library");
    		 System.out.println("They donot take books or return books"); 
@@ -296,45 +300,53 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	public String category() {
 	 Scanner sc=new Scanner(System.in);
    	 System.out.println("These are the category in our library:");
-   	 System.out.println(" a.Historical Fiction\n b.Fantasy\n c.Mystery\n d.Comics");
-   	 System.out.println("choose any one category:");
-   	 bookCategory=sc.next();
-   	 Pattern p=Pattern.compile("^[a-d]$");
-     Matcher m=p.matcher(bookCategory);
-     if(m.find())
-     {
+   	 System.out.println(" 1.Historical Fiction\n 2.Fantasy\n 3.Mystery\n 4.Comics");
+   	 System.out.println("choose any one Book category:");
+   	 bookCategory=sc.nextInt();
+//   	 Pattern p=Pattern.compile("^[a-d]$");
+//     Matcher m=p.matcher(bookCategory);
+//     if(m.find())
+//     {
+   	 if(bookCategory==1||bookCategory==2||bookCategory==3||bookCategory==4) 
+   	 {
    	 System.out.println(bookCategory);
    	 switch(bookCategory)
    	 {
-   		 case "a":
+   		 case 1:
    			 System.out.println(" Historical Fiction:\n 1.Pachinko\n 2.All the Light We Cannot See\n 3.The Nightingale\n");
    			 System.out.println("Enter an option:");
    			 int historicalFictionOption=sc.nextInt();
-   			 System.out.println(historicalFictionOption);
+   			 //System.out.println(historicalFictionOption);
    			 if(historicalFictionOption>0 && historicalFictionOption<=3)
    			 {
    			 if(historicalFictionOption==1)
    			 {
-   				 String book1="Pachinko";
-   				 String bookName=book1;
+   				 bookName="Pachinko";
+   				 //String book1="Pachinko";
+   				 //bookName=book1;
    				 System.out.println("Book Name:"+bookName);
    				 bookCount=5;
    				 System.out.println("no of "+bookName+" books available are: "+bookCount); 		     
    			 }
    			 else if(historicalFictionOption==2)
    			 {
-   				  String book2="All the Light We Cannot See";
-   				  System.out.println("Book Name:"+book2); 
+   				  bookName="All the Light We Cannot See";
+
+//   				  String book2="All the Light We Cannot See";
+//   				  bookName=book2;
+   				  System.out.println("Book Name:"+bookName); 
    			      System.out.println("This book available after 27/04/2024");
    			      System.out.println("you have to wait or choose other book");
    			      libraryDetails.category();
    			 }
    			 else if(historicalFictionOption==3)
    			 {
-   				 String book3="The Nightingale";
-  				     System.out.println("Book Name:"+book3); 
-  				     bookCount=10;
-				     System.out.println("no of "+book3+" books available are: "+bookCount); 
+   				 bookName="The Nightingale";
+//   				  String book3="The Nightingale";
+//   				  bookName=book3;
+  				  System.out.println("Book Name:"+bookName); 
+  				  bookCount=10;
+				    System.out.println("no of "+bookName+" books available are: "+bookCount); 
    			 }
    			 }
    			 else {
@@ -342,34 +354,40 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    				 libraryDetails.category();
    			 }
    			 break;
-            case "b":
+            case 2:
            	 System.out.println(" Fantasy:\n 1.Jade City\n 2.Tigana\n 3.The Night Circus");
            	 System.out.println("Enter an option:");
            	 int fantasy=sc.nextInt();
-   			 System.out.println(fantasy);
+   			 //System.out.println(fantasy);
    			 if(fantasy>0 && fantasy<=3)
    			 {
    			 if(fantasy==1) 
    			 {
-   				 String book1="Jade City";
-   				 System.out.println("Book Name:"+book1);
+   				bookName="Jade City";
+//   				 String book1="Jade City";
+//   				 bookName=book1;
+   				 System.out.println("Book Name:"+bookName);
    				 bookCount=15;
-   				 System.out.println("no of "+book1+" books available are: "+bookCount); 
+   				 System.out.println("no of "+bookName+" books available are: "+bookCount); 
    			 }
    			 else if(fantasy==2)
    			 { 
-   				  String book2="Tigana";
-   				  System.out.println("Book Name:"+book2);
+   				bookName="Tigana";
+//   				  String book2="Tigana";
+//   				  bookName=book2;
+   				  System.out.println("Book Name:"+bookName);
    			      System.out.println("This book available after 27/04/2024");
    			      System.out.println("you have to wait or choose other book");
    			      libraryDetails.category();
    			 }
    			 else if(fantasy==3)
    			 {
-   				 String book3="The Night Circus";
-  				 System.out.println("Book Name:"+book3);
+   				bookName="The Night Circus";
+//   				 String book3="The Night Circus";
+//   				 bookName=book3;
+  				 System.out.println("Book Name:"+bookName);
   				 bookCount=3;
-				 System.out.println("no of "+book3+" books available are: "+bookCount);
+				 System.out.println("no of "+bookName+" books available are: "+bookCount);
    			 }
    			 }
    			 else
@@ -378,24 +396,28 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    				 libraryDetails.category();
    			 }
    			 break; 
-   	     case "c":
+   	     case 3:
    	    	 System.out.println(" Mystery:\n 1.Gone Girl\n 2.The Girl with the Dragon\n");
    	    	 System.out.println("Enter an option:");
    	    	 int mystery=sc.nextInt();
-   			 System.out.println(mystery);
+   			// System.out.println(mystery);
    			 if(mystery>0 && mystery<=2)
    			 {
    			 if(mystery==1)
    			 {
-   				 String book1="Gone Girl";
-   				 System.out.println("Book Name:"+book1);
+   				bookName="Gone Girl";
+//   				 String book1="Gone Girl";
+//   				 bookName=book1;
+   				 System.out.println("Book Name:"+bookName);
    				 bookCount=10;
-   				 System.out.println("no of "+book1+" books available are: "+bookCount); 
+   				 System.out.println("no of "+bookName+" books available are: "+bookCount); 
    			 }
    			 else if(mystery==2)
    			 {
-   		         String book2="The Girl with the Dragon";
-   		         System.out.println("Book Name:"+book2);
+   				bookName="The Girl with the Dragon";
+//   		         String book2="The Girl with the Dragon";
+//   		         bookName=book2;
+   		         System.out.println("Book Name:"+bookName);
    		         System.out.println("This book available after 03/05/2024");
   			     System.out.println("you have to wait or choose other book");
   			     libraryDetails.category();       
@@ -407,24 +429,28 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    				 libraryDetails.category();
    			 }
    			 break;
-   	     case "d":
+   	     case 4:
    	    	 System.out.println("Comics:\n 1.The Sand Man\n 2.Watchmen\n");
    	    	 System.out.println("Enter an option:");
    	    	 int comics=sc.nextInt();
-			 System.out.println(comics);
+			 //System.out.println(comics);
 			 if(comics>0 && comics<=2)
 			 {
 			     if(comics==1)
 			     {
-			    	 String book1="The Sand Man";
-			    	 System.out.println("Book Name:"+book1);
+			    	 bookName="The Sand Man";
+//			    	 String book1="The Sand Man";
+//			    	 bookName=book1;
+			    	 System.out.println("Book Name:"+bookName);
 			    	 bookCount=20;
-   				 System.out.println("no of "+book1+" books available are: "+bookCount); 
+   				 System.out.println("no of "+bookName+" books available are: "+bookCount); 
 			     }
 			     else if(comics==2)
    			     {
-   		         String book2="Watchmen";
-   		         System.out.println("Book Name:"+book2);
+			    	 bookName="Watchmen";
+//   		         String book2="Watchmen";
+//   		         bookName=book2;
+   		         System.out.println("Book Name:"+bookName);
    		         System.out.println("This book available after 09/05/2024");
   			         System.out.println("you have to wait or choose other book");
   			         libraryDetails.category();
@@ -443,7 +469,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
        	 System.out.println("error");
        	 libraryDetails.category();
         }
-		return bookCategory;
+		return bookName;
 	}
 	@Override
 	public int noOfBooksTakenDetails() {
@@ -615,9 +641,9 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
             prepareStatement1.setInt(1,pojo.getUser());
             prepareStatement1.setInt(2,pojo.getLibraryCardNumber());
             prepareStatement1.setString(3,pojo.getUserPassword());
-            prepareStatement1.setString(4,pojo.getPurpose());
+            prepareStatement1.setInt(4,pojo.getPurpose());
             prepareStatement1.setString(5,pojo.getBookName());
-            prepareStatement1.setString(6,pojo.getBookCategory());
+            prepareStatement1.setInt(6,pojo.getBookCategory());
             prepareStatement1.setInt(7,pojo.getNoOfBooksTaken());
             int rows = prepareStatement1.executeUpdate();
             System.out.println("inserted"+rows);
@@ -629,7 +655,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	Connection connection = JdbcConnection.getConnection();
     System.out.println(connection);
     java.sql.Statement statement = connection.createStatement();
-    String update = "update library set user=1,BookCategory='Horror' where libraryCardNumber=23412";
+    String update = "update library set user=1,BookCategory=3 where libraryCardNumber=23412";
     statement.executeUpdate(update);
     System.out.println("Updated Successfully.");
     return false; //update

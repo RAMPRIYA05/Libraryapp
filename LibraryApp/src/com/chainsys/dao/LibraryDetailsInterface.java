@@ -9,7 +9,7 @@ public interface LibraryDetailsInterface {
 	 public String generatePassword();
 	 public int cardNumber();
 	 public String libraryPassword();
-	 public String purpose();
+	 public int purpose();
 	 public String category();
 	 public int noOfBooksTakenDetails();
 	 public void fineDetails();
