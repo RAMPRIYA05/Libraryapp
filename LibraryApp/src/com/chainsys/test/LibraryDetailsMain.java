@@ -11,5 +11,7 @@ public class LibraryDetailsMain {
 		// TODO Auto-generated method stub
 	LibraryDetailsImplementation libraryDetails = new LibraryDetailsImplementation();
 	libraryDetails.libraryLogin();
+	libraryDetails.update();
+	libraryDetails.delete();
 }
 }

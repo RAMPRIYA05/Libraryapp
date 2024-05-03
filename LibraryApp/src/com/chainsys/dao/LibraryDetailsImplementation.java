@@ -624,4 +624,24 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
             return false;
         }     
 	}
+
+  public boolean update() throws ClassNotFoundException, SQLException {
+	Connection connection = JdbcConnection.getConnection();
+    System.out.println(connection);
+    java.sql.Statement statement = connection.createStatement();
+    String update = "update library set user=1,BookCategory='Horror' where libraryCardNumber=23412";
+    statement.executeUpdate(update);
+    System.out.println("Updated Successfully.");
+    return false; //update
+  }
+  
+  public boolean delete() throws ClassNotFoundException, SQLException {
+	Connection connection = JdbcConnection.getConnection();
+	System.out.println(connection);
+    java.sql.Statement statement = connection.createStatement();
+    String delete = "delete from library where noOfBooksTaken=4";
+    statement.executeUpdate(delete);
+    System.out.println("Deleted successfully.");
+    return false;
+  }
 }
