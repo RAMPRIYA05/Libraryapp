@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,6 +32,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
     static String bookName;
     static char nextBook;
     static String userPassword;
+    static String newUserPassword;
     static String option;
     //static String existingList;
 	@Override
@@ -40,13 +42,13 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    	 System.out.println("Type of users:");
    	 System.out.println(" 1.membership\n 2.non-membership\n");
    	 System.out.println("User(1/2):");
-   	 int user=sc.nextInt();
+   	 user=sc.nextInt();
 //   	String userString=Integer.toString(user);
 //   	 Pattern p=Pattern.compile("^[1-2]$");
 //     Matcher m=p.matcher(userString);
 //     if(m.find())
 //        {
-   	 if(user==1||user==2)
+   	 if(user==1 || user==2)
    	 {
        	 switch(user) 
        	 {
@@ -152,8 +154,8 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
        	     {
        			 System.out.println("Error..enter (y/Y/N/n)");
        			libraryDetails.role();
-       			 }
-       			 }
+       		 }
+       		}
        		 
        	 }
         else
@@ -169,7 +171,10 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	public int generateLibraryCardNumber() {
 	    Scanner sc=new Scanner(System.in);
    	    //System.out.println("Now you have to sign up:");
-   	    System.out.println("newLibraryCardNumber="+age+membershipPackage+"12");
+	    System.out.println(age);
+	    System.out.println(membershipPackage);
+	    newLibraryCardNumber=age+membershipPackage;
+   	    System.out.println("newLibraryCardNumber="+newLibraryCardNumber);
    	    libraryDetails.generatePassword();
 		return newLibraryCardNumber;
 	}
@@ -177,9 +182,9 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	public String generatePassword() {
 	    	 Scanner sc=new Scanner(System.in);
 	    	 System.out.println("Enter the password:");
-	    	 userPassword=sc.next();
+	    	 newUserPassword=sc.next();
 	         Pattern p=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$");
-	         Matcher m=p.matcher(userPassword);
+	         Matcher m=p.matcher(newUserPassword);
 	         
 	         if(m.matches())
 	         {
@@ -198,7 +203,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	            libraryDetails.generatePassword();
 	         }
 	                 
-			return userPassword;
+			return newUserPassword;
 	}
 	
 	@Override
@@ -207,7 +212,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	        System.out.println("Library CardNumber Of User:");
 	        libraryCardNumber=sc.nextInt();
 	        String cardNumber=Integer.toString(libraryCardNumber);
-	        Pattern p=Pattern.compile("^[0-9]{5}$");
+	        Pattern p=Pattern.compile("^[0-9]{2}$");
 	        Matcher m=p.matcher(cardNumber);
 	        if(m.find())
 	        {	
@@ -217,7 +222,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	        else
 	        {
 	        	System.out.println("Error");
-	        	System.out.println("card number holds 5 digits");
+	        	System.out.println("card number holds 2 digits");
 	    	    libraryDetails.cardNumber();
 	    	    
 	        }
@@ -264,7 +269,6 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    	 switch(purpose)
    	 {
    	 case 1:
-   		
    		 libraryDetails.category();
    		 libraryDetails.noOfBooksTakenDetails();
       	 libraryDetails.fineDetails();
@@ -272,12 +276,14 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
       	 libraryDetails.nextBookDetails();
    		 break;
    	 case 2:
-   		 System.out.println("Name of the book:");
-   		 String book=sc.nextLine();
-   		 System.out.println("book:"+book);
-   		 System.out.println("Name of the category:");
-   		 String category=sc.nextLine();
-   		 System.out.println("Category:"+category);
+   		 libraryDetails.category();
+   		 libraryDetails.noOfBooksTakenDetails();
+//   		 System.out.println("Name of the category:");
+//   		 String category=sc.nextLine();
+//   		 System.out.println("Book Category:"+category);
+//   		 System.out.println("Name of the book:");
+//  		 String book=sc.nextLine();
+//  		 System.out.println("Book Name:"+book);
    		 libraryDetails.fineDetails();
    		 libraryDetails.returnDate();
    		 System.out.println("Book returned");
@@ -315,11 +321,11 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    		 case 1:
    			 System.out.println(" Historical Fiction:\n 1.Pachinko\n 2.All the Light We Cannot See\n 3.The Nightingale\n");
    			 System.out.println("Enter an option:");
-   			 int historicalFictionOption=sc.nextInt();
+   			 int book=sc.nextInt();
    			 //System.out.println(historicalFictionOption);
-   			 if(historicalFictionOption>0 && historicalFictionOption<=3)
+   			 if(book>0 && book<=3)
    			 {
-   			 if(historicalFictionOption==1)
+   			 if(book==1)
    			 {
    				 bookName="Pachinko";
    				 //String book1="Pachinko";
@@ -328,7 +334,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    				 bookCount=5;
    				 System.out.println("no of "+bookName+" books available are: "+bookCount); 		     
    			 }
-   			 else if(historicalFictionOption==2)
+   			 else if(book==2)
    			 {
    				  bookName="All the Light We Cannot See";
 
@@ -339,7 +345,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    			      System.out.println("you have to wait or choose other book");
    			      libraryDetails.category();
    			 }
-   			 else if(historicalFictionOption==3)
+   			 else if(book==3)
    			 {
    				 bookName="The Nightingale";
 //   				  String book3="The Nightingale";
@@ -357,11 +363,11 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
             case 2:
            	 System.out.println(" Fantasy:\n 1.Jade City\n 2.Tigana\n 3.The Night Circus");
            	 System.out.println("Enter an option:");
-           	 int fantasy=sc.nextInt();
+           	 book=sc.nextInt();
    			 //System.out.println(fantasy);
-   			 if(fantasy>0 && fantasy<=3)
+   			 if(book>0 && book<=3)
    			 {
-   			 if(fantasy==1) 
+   			 if(book==1) 
    			 {
    				bookName="Jade City";
 //   				 String book1="Jade City";
@@ -370,7 +376,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    				 bookCount=15;
    				 System.out.println("no of "+bookName+" books available are: "+bookCount); 
    			 }
-   			 else if(fantasy==2)
+   			 else if(book==2)
    			 { 
    				bookName="Tigana";
 //   				  String book2="Tigana";
@@ -380,7 +386,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    			      System.out.println("you have to wait or choose other book");
    			      libraryDetails.category();
    			 }
-   			 else if(fantasy==3)
+   			 else if(book==3)
    			 {
    				bookName="The Night Circus";
 //   				 String book3="The Night Circus";
@@ -399,11 +405,11 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    	     case 3:
    	    	 System.out.println(" Mystery:\n 1.Gone Girl\n 2.The Girl with the Dragon\n");
    	    	 System.out.println("Enter an option:");
-   	    	 int mystery=sc.nextInt();
+   	    	 book=sc.nextInt();
    			// System.out.println(mystery);
-   			 if(mystery>0 && mystery<=2)
+   			 if(book>0 && book<=2)
    			 {
-   			 if(mystery==1)
+   			 if(book==1)
    			 {
    				bookName="Gone Girl";
 //   				 String book1="Gone Girl";
@@ -412,7 +418,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    				 bookCount=10;
    				 System.out.println("no of "+bookName+" books available are: "+bookCount); 
    			 }
-   			 else if(mystery==2)
+   			 else if(book==2)
    			 {
    				bookName="The Girl with the Dragon";
 //   		         String book2="The Girl with the Dragon";
@@ -432,11 +438,11 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
    	     case 4:
    	    	 System.out.println("Comics:\n 1.The Sand Man\n 2.Watchmen\n");
    	    	 System.out.println("Enter an option:");
-   	    	 int comics=sc.nextInt();
+   	    	 book=sc.nextInt();
 			 //System.out.println(comics);
-			 if(comics>0 && comics<=2)
+			 if(book>0 && book<=2)
 			 {
-			     if(comics==1)
+			     if(book==1)
 			     {
 			    	 bookName="The Sand Man";
 //			    	 String book1="The Sand Man";
@@ -445,7 +451,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 			    	 bookCount=20;
    				 System.out.println("no of "+bookName+" books available are: "+bookCount); 
 			     }
-			     else if(comics==2)
+			     else if(book==2)
    			     {
 			    	 bookName="Watchmen";
 //   		         String book2="Watchmen";
@@ -589,14 +595,12 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	public void details() {
 		pojo.setUser(libraryDetails.role());
 		//pojo.setUser(user);
-		//pojo.setUser(user);
 		pojo.setLibraryCardNumber(libraryCardNumber);
 		pojo.setPurpose(purpose);
 		pojo.setBookCategory(bookCategory);
 		pojo.setBookName(bookName);
 		pojo.setNoOfBooksTaken(noOfBooksTaken);
 		pojo.setNextBook(nextBook);
-		//System.out.println("Type of user:"+pojo.getUser());
 		System.out.println("Type of user:"+pojo.getUser());
 		System.out.println("Library Card Number:"+pojo.getLibraryCardNumber());
 		System.out.println("Purpose:"+pojo.getPurpose());
@@ -606,12 +610,9 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 		System.out.println("NextBook:"+pojo.getNextBook());	
 	}
 	public boolean libraryLogin() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		Connection connection = JdbcConnection.getConnection();
         System.out.println(connection);
-        libraryDetails.details();
         ArrayList existingList = new ArrayList();
-        
         pojo.setUser(user);
         pojo.setLibraryCardNumber(libraryCardNumber);
 		pojo.setUserPassword(userPassword);
@@ -619,22 +620,21 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
         pojo.setBookCategory(bookCategory);
         pojo.setBookName(bookName);
         pojo.setNoOfBooksTaken(noOfBooksTaken);
-        String login="select LibraryCardNumber from library";
+        String login="select libraryCardNumber from library";
         PreparedStatement prepareStatement=connection.prepareStatement(login);
         ResultSet resultSet = prepareStatement.executeQuery();
-        
 		while(resultSet.next())
-        {
-           // int id = resultSet.getInt(stringToInt);
-            existingList.add(login);
+        {     
+            existingList.add(libraryCardNumber);
         }
         if(existingList.contains(pojo.getLibraryCardNumber()))
         {
+        
              System.out.println("login already exist");
              return true;
         }
         else
-        {
+        {	
             System.out.println("Card number available for login");
             String insertStatement = "insert into library(user,libraryCardNumber,userPassword,purpose,bookCategory,bookName,noOfBooksTaken)values(?,?,?,?,?,?,?)";
             PreparedStatement prepareStatement1 = connection.prepareStatement(insertStatement);
@@ -642,8 +642,8 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
             prepareStatement1.setInt(2,pojo.getLibraryCardNumber());
             prepareStatement1.setString(3,pojo.getUserPassword());
             prepareStatement1.setInt(4,pojo.getPurpose());
-            prepareStatement1.setString(5,pojo.getBookName());
-            prepareStatement1.setInt(6,pojo.getBookCategory());
+            prepareStatement1.setInt(5,pojo.getBookCategory());
+            prepareStatement1.setString(6,pojo.getBookName());
             prepareStatement1.setInt(7,pojo.getNoOfBooksTaken());
             int rows = prepareStatement1.executeUpdate();
             System.out.println("inserted"+rows);
@@ -655,7 +655,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	Connection connection = JdbcConnection.getConnection();
     System.out.println(connection);
     java.sql.Statement statement = connection.createStatement();
-    String update = "update library set user=1,BookCategory=3 where libraryCardNumber=23412";
+    String update = "update library set noOfBooksTaken=1 where libraryCardNumber=55612";
     statement.executeUpdate(update);
     System.out.println("Updated Successfully.");
     return false; //update
@@ -670,4 +670,42 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
     System.out.println("Deleted successfully.");
     return false;
   }
+  
+      public boolean register() throws ClassNotFoundException, SQLException {
+	  Connection connection = JdbcConnection.getConnection();
+	  System.out.println(connection);
+	  ArrayList existingList = new ArrayList();
+	  pojo.setAge(age);
+      pojo.setMembershipPackage(membershipPackage);
+      pojo.setNewLibraryCardNumber(newLibraryCardNumber);
+      pojo.setNewUserPassword(newUserPassword);
+	  String register="select newLibraryCardNumber from libraryregister";
+	  PreparedStatement prepareStatement=connection.prepareStatement(register);
+      ResultSet resultSet = prepareStatement.executeQuery();
+      while(resultSet.next())
+      {
+    	  newLibraryCardNumber=resultSet.getInt(1);
+    	  existingList.add(newLibraryCardNumber);
+      }
+      if(existingList.contains(pojo.getNewLibraryCardNumber()))
+    	  
+      {   	 
+    	System.out.println("Already registered");  
+    	  
+      }
+      else
+      {
+    	  String registerStatement = "insert into libraryregister(age,membershipPackage,newLibraryCardNumber,newUserPassword)values(?,?,?,?)";
+    	  PreparedStatement prepareStatement1 = connection.prepareStatement(registerStatement);
+         
+          prepareStatement1.setInt(1,pojo.getAge());
+          prepareStatement1.setInt(2,pojo.getMembershipPackage());
+          prepareStatement1.setInt(3,pojo.getNewLibraryCardNumber());
+          prepareStatement1.setString(4,pojo.getNewUserPassword());
+          int rows = prepareStatement1.executeUpdate();
+          System.out.println("register"+rows);
+      }
+	return false;
+  }
 }
+

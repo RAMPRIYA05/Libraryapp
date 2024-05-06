@@ -12,7 +12,10 @@ public class LibraryDetailsPojo {
     public char nextBook;
     public int purpose;
     public String returnDate;
-    
+    public int age;
+    public int membershipPackage;
+    public int newLibraryCardNumber;
+    public String newUserPassword;
 	public int getUser() {
 		return user;
 	}
@@ -83,13 +86,44 @@ public class LibraryDetailsPojo {
 	public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
 	}
+	
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public int getMembershipPackage() {
+		return membershipPackage;
+	}
+	public void setMembershipPackage(int membershipPackage) {
+		this.membershipPackage = membershipPackage;
+	}
+	
+	public int getNewLibraryCardNumber() {
+		return newLibraryCardNumber;
+	}
+	public void setNewLibraryCardNumber(int newLibraryCardNumber) {
+		this.newLibraryCardNumber = newLibraryCardNumber;
+	}
+	
+	public String getNewUserPassword() {
+		return newUserPassword;
+	}
+	public void setNewUserPassword(String newUserPassword) {
+		this.newUserPassword = newUserPassword;
+	}
 	@Override
 	public String toString() {
 		return "LibraryDetailsPojo [user=" + user + ", noOfBooksTaken=" + noOfBooksTaken + ", libraryCardNumber="
 				+ libraryCardNumber + ", todayDate=" + todayDate + ", category=" + category + ", userPassword="
 				+ userPassword + ", bookName=" + bookName + ", bookCategory=" + bookCategory + ", nextBook=" + nextBook
-				+ ", purpose=" + purpose + ", returnDate=" + returnDate + "]";
+				+ ", purpose=" + purpose + ", returnDate=" + returnDate + ", age=" + age + ", membershipPackage="
+				+ membershipPackage + ", newLibraryCardNumber=" + newLibraryCardNumber + ", newUserPassword="
+				+ newUserPassword + "]";
+	}
+	
+	
 	
 
-}
 }

@@ -9,7 +9,6 @@ public class JdbcConnection {
 	{
 		Connection getConnection=getConnection();
 		System.out.println(getConnection); 
-		// TODO Auto-generated method stub
 //		LibraryDetailsImplementation libraryDetails = new LibraryDetailsImplementation();
 //		libraryDetails.details();
 		

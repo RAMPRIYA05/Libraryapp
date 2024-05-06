@@ -18,4 +18,7 @@ public interface LibraryDetailsInterface {
 	 public char nextBookDetails();
 	 public void details();
 	 public boolean libraryLogin() throws SQLException, ClassNotFoundException;
+	 public boolean register() throws ClassNotFoundException, SQLException;
+	 public boolean update() throws SQLException, ClassNotFoundException;
+	 public boolean delete() throws ClassNotFoundException, SQLException;
 }
