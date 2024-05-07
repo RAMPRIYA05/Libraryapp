@@ -16,6 +16,14 @@ public class LibraryDetailsPojo {
     public int membershipPackage;
     public int newLibraryCardNumber;
     public String newUserPassword;
+    public int siNo;
+    
+	public int getSiNo() {
+		return siNo;
+	}
+	public void setSiNo(int siNo) {
+		this.siNo = siNo;
+	}
 	public int getUser() {
 		return user;
 	}
@@ -120,9 +128,8 @@ public class LibraryDetailsPojo {
 				+ userPassword + ", bookName=" + bookName + ", bookCategory=" + bookCategory + ", nextBook=" + nextBook
 				+ ", purpose=" + purpose + ", returnDate=" + returnDate + ", age=" + age + ", membershipPackage="
 				+ membershipPackage + ", newLibraryCardNumber=" + newLibraryCardNumber + ", newUserPassword="
-				+ newUserPassword + "]";
+				+ newUserPassword + ", siNo=" + siNo + "]";
 	}
-	
 	
 	
 

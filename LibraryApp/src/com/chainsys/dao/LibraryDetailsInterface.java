@@ -16,9 +16,10 @@ public interface LibraryDetailsInterface {
 	 public LocalDate todayDate();
 	 public LocalDate returnDate();
 	 public char nextBookDetails();
-	 public void details();
+	 //public void details();
 	 public boolean libraryLogin() throws SQLException, ClassNotFoundException;
-	 public boolean register() throws ClassNotFoundException, SQLException;
-	 public boolean update() throws SQLException, ClassNotFoundException;
-	 public boolean delete() throws ClassNotFoundException, SQLException;
+	 //public boolean register() throws ClassNotFoundException, SQLException;
+	 //public boolean update() throws SQLException, ClassNotFoundException;
+	 //public boolean delete() throws ClassNotFoundException, SQLException;
+	 //public boolean retrive() throws ClassNotFoundException, SQLException;
 }

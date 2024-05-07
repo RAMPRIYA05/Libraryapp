@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -84,7 +85,8 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
        			     System.out.println("we have use different type of membership package.");
        			     System.out.println("package option:1.one year=200 2.two year=350 3.three year=550 4.five year=900");
        			     membershipPackage=sc.nextInt();
-       			     if(membershipPackage==1||membershipPackage==2||membershipPackage==3||membershipPackage==4)
+       			     if(membershipPackage>0 && membershipPackage<=4)
+       			     //if(membershipPackage==1||membershipPackage==2||membershipPackage==3||membershipPackage==4)
        			     {
        			     if(membershipPackage==1)
        			     {
@@ -110,7 +112,8 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
        				 System.out.println("We give offers for minor and senoir citizen.");
        				 System.out.println("package option:1.one year=180 2.two year=330 3.three year=530 4.five year=870");
        				 membershipPackage=sc.nextInt();
-       				 if(membershipPackage==1||membershipPackage==2||membershipPackage==3||membershipPackage==4)
+       				 if(membershipPackage>0 && membershipPackage<=4)
+       				 // if(membershipPackage==1||membershipPackage==2||membershipPackage==3||membershipPackage==4)
        			     {
        				 if(membershipPackage==1)
            			 {
@@ -183,6 +186,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	    	 Scanner sc=new Scanner(System.in);
 	    	 System.out.println("Enter the password:");
 	    	 newUserPassword=sc.next();
+	    	
 	         Pattern p=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$");
 	         Matcher m=p.matcher(newUserPassword);
 	         
@@ -276,14 +280,14 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
       	 libraryDetails.nextBookDetails();
    		 break;
    	 case 2:
-   		 libraryDetails.category();
-   		 libraryDetails.noOfBooksTakenDetails();
-//   		 System.out.println("Name of the category:");
-//   		 String category=sc.nextLine();
-//   		 System.out.println("Book Category:"+category);
-//   		 System.out.println("Name of the book:");
-//  		 String book=sc.nextLine();
-//  		 System.out.println("Book Name:"+book);
+//   		 libraryDetails.category();
+//   		 libraryDetails.noOfBooksTakenDetails();
+   		 System.out.println("Name of the category:");
+   		 String category=sc.nextLine();
+   		 System.out.println("Book Category:"+category);
+   		 System.out.println("Name of the book:");
+  		 String book=sc.nextLine();
+  		 System.out.println("Book Name:"+book);
    		 libraryDetails.fineDetails();
    		 libraryDetails.returnDate();
    		 System.out.println("Book returned");
@@ -313,7 +317,7 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 //     Matcher m=p.matcher(bookCategory);
 //     if(m.find())
 //     {
-   	 if(bookCategory==1||bookCategory==2||bookCategory==3||bookCategory==4) 
+ 	 if(bookCategory==1||bookCategory==2||bookCategory==3||bookCategory==4) 
    	 {
    	 System.out.println(bookCategory);
    	 switch(bookCategory)
@@ -479,34 +483,47 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
 	}
 	@Override
 	public int noOfBooksTakenDetails() {
-		Scanner sc=new Scanner(System.in);
-        System.out.println("Number of books taken by user:");
-        noOfBooksTaken=sc.nextInt();
-        String numberOfBooksTaken=Integer.toString(noOfBooksTaken);
-        Pattern p=Pattern.compile("^[0-9]*$");
-        Matcher m=p.matcher(numberOfBooksTaken);
-        if(m.find())
-        {	
-       	 if(bookCount>noOfBooksTaken && noOfBooksTaken!=0)
-       	 {
+//		  Scanner sc=new Scanner(System.in);
+//        System.out.println("Number of books taken by user:");
+//        noOfBooksTaken=sc.nextInt();
+//        String numberOfBooksTaken=Integer.toString(noOfBooksTaken);
+//        Pattern p=Pattern.compile("^[0-9]*$");
+//        Matcher m=p.matcher(numberOfBooksTaken);
+//        if(m.find())
+//        {	
+        try {
+//       	 if(bookCount>noOfBooksTaken && noOfBooksTaken!=0)
+//       	 {
+        	Scanner sc=new Scanner(System.in);
+            System.out.println("Number of books taken by user:");
+            noOfBooksTaken=sc.nextInt();
     	   System.out.println(noOfBooksTaken);
+    	   if(bookCount>noOfBooksTaken && noOfBooksTaken!=0) {
    	 	   int remainingNoOfBooks=bookCount-noOfBooksTaken;
    	 	   System.out.println("Remaining number of books:"+remainingNoOfBooks);
    	 	   System.out.println("*******************************");
    	 	   System.out.println("How many days after you return the book?");
     	   System.out.println("If You return the book within 15 days.Then no fine");
-       	 }
+    	   }
+//       	 }
        	 else
        	 {
        		 System.out.println("enter no of books less than book available");
        		 libraryDetails.noOfBooksTakenDetails();
        	 }
-			}
-        else
-        {
-    	    System.out.println("Error");
-    	    libraryDetails.noOfBooksTakenDetails();
         }
+        catch(InputMismatchException e)
+        {
+        	System.out.println(e);
+        	libraryDetails.noOfBooksTakenDetails();
+        	
+        }
+		//	}
+     //   else
+//        {
+//    	    System.out.println("Error");
+//    	    libraryDetails.noOfBooksTakenDetails();
+//        }
 	    return noOfBooksTaken;
 	}
 	@Override
@@ -591,121 +608,206 @@ public class LibraryDetailsImplementation implements LibraryDetailsInterface{
   	  }
   	  return nextBook;
 	}
-	@Override
-	public void details() {
-		pojo.setUser(libraryDetails.role());
-		//pojo.setUser(user);
-		pojo.setLibraryCardNumber(libraryCardNumber);
-		pojo.setPurpose(purpose);
-		pojo.setBookCategory(bookCategory);
-		pojo.setBookName(bookName);
-		pojo.setNoOfBooksTaken(noOfBooksTaken);
-		pojo.setNextBook(nextBook);
-		System.out.println("Type of user:"+pojo.getUser());
-		System.out.println("Library Card Number:"+pojo.getLibraryCardNumber());
-		System.out.println("Purpose:"+pojo.getPurpose());
-		System.out.println("Book Category:"+pojo.getBookCategory());
-		System.out.println("Book Name:"+pojo.getBookName());
-		System.out.println("No of Books Taken:"+pojo.getNoOfBooksTaken());
-		System.out.println("NextBook:"+pojo.getNextBook());	
-	}
-	public boolean libraryLogin() throws ClassNotFoundException, SQLException {
+//	@Override
+//	public void details() {
+//		pojo.setUser(libraryDetails.role());
+//		//pojo.setUser(user);
+//		pojo.setLibraryCardNumber(libraryCardNumber);
+//		pojo.setPurpose(purpose);
+//		pojo.setBookCategory(bookCategory);
+//		pojo.setBookName(bookName);
+//		pojo.setNoOfBooksTaken(noOfBooksTaken);
+//		pojo.setNextBook(nextBook);
+//		System.out.println("Type of user:"+pojo.getUser());
+//		System.out.println("Library Card Number:"+pojo.getLibraryCardNumber());
+//		System.out.println("Purpose:"+pojo.getPurpose());
+//		System.out.println("Book Category:"+pojo.getBookCategory());
+//		System.out.println("Book Name:"+pojo.getBookName());
+//		System.out.println("No of Books Taken:"+pojo.getNoOfBooksTaken());
+//		System.out.println("NextBook:"+pojo.getNextBook());	
+//	}
+	public boolean libraryLogin() throws ClassNotFoundException, SQLException{
+		Scanner sc=new Scanner(System.in);
 		Connection connection = JdbcConnection.getConnection();
         System.out.println(connection);
         ArrayList existingList = new ArrayList();
-        pojo.setUser(user);
-        pojo.setLibraryCardNumber(libraryCardNumber);
-		pojo.setUserPassword(userPassword);
-        pojo.setPurpose(purpose);
-        pojo.setBookCategory(bookCategory);
-        pojo.setBookName(bookName);
-        pojo.setNoOfBooksTaken(noOfBooksTaken);
-        String login="select libraryCardNumber from library";
-        PreparedStatement prepareStatement=connection.prepareStatement(login);
-        ResultSet resultSet = prepareStatement.executeQuery();
-		while(resultSet.next())
-        {     
-            existingList.add(libraryCardNumber);
-        }
-        if(existingList.contains(pojo.getLibraryCardNumber()))
+        System.out.println("1.log in\n 2.sign up\n");
+		int type=sc.nextInt();
+        switch(type)
         {
+        case 1:
+        	pojo.setLibraryCardNumber(libraryDetails.cardNumber());
+    		pojo.setPurpose(purpose);
+    		pojo.setBookCategory(bookCategory);
+    		pojo.setBookName(bookName);
+    		pojo.setNoOfBooksTaken(noOfBooksTaken);
+    		pojo.setNextBook(nextBook);
+    		
+    		System.out.println("Library Card Number:"+pojo.getLibraryCardNumber());
+    		System.out.println("Purpose:"+pojo.getPurpose());
+    		System.out.println("Book Category:"+pojo.getBookCategory());
+    		System.out.println("Book Name:"+pojo.getBookName());
+    		System.out.println("No of Books Taken:"+pojo.getNoOfBooksTaken());
+    		System.out.println("NextBook:"+pojo.getNextBook());	
         
-             System.out.println("login already exist");
-             return true;
-        }
-        else
-        {	
-            System.out.println("Card number available for login");
-            String insertStatement = "insert into library(user,libraryCardNumber,userPassword,purpose,bookCategory,bookName,noOfBooksTaken)values(?,?,?,?,?,?,?)";
-            PreparedStatement prepareStatement1 = connection.prepareStatement(insertStatement);
-            prepareStatement1.setInt(1,pojo.getUser());
-            prepareStatement1.setInt(2,pojo.getLibraryCardNumber());
-            prepareStatement1.setString(3,pojo.getUserPassword());
-            prepareStatement1.setInt(4,pojo.getPurpose());
-            prepareStatement1.setInt(5,pojo.getBookCategory());
-            prepareStatement1.setString(6,pojo.getBookName());
-            prepareStatement1.setInt(7,pojo.getNoOfBooksTaken());
-            int rows = prepareStatement1.executeUpdate();
-            System.out.println("inserted"+rows);
-            return false;
-        }     
-	}
+         	pojo.setNewLibraryCardNumber(newLibraryCardNumber);
+            pojo.setNewUserPassword(newUserPassword);
+            pojo.setLibraryCardNumber(libraryCardNumber);
+    		pojo.setUserPassword(userPassword);
 
-  public boolean update() throws ClassNotFoundException, SQLException {
-	Connection connection = JdbcConnection.getConnection();
-    System.out.println(connection);
-    java.sql.Statement statement = connection.createStatement();
-    String update = "update library set noOfBooksTaken=1 where libraryCardNumber=55612";
-    statement.executeUpdate(update);
-    System.out.println("Updated Successfully.");
-    return false; //update
-  }
+            String login="select libraryCardNumber from library";
+            PreparedStatement prepareStatement=connection.prepareStatement(login);
+            ResultSet resultSet = prepareStatement.executeQuery();
+    		while(resultSet.next())
+            {     
+    			libraryCardNumber=resultSet.getInt(1);
+                existingList.add(libraryCardNumber);
+            }
+            if(existingList.contains(pojo.getLibraryCardNumber()))
+            {
+            
+                 System.out.println("login already exist");
+                 return true;
+            }
+            else
+            {	
+                System.out.println("Card number available for login");
+                String insertStatement = "insert into library(siNo,newLibraryCardNumber,newUserPassword,libraryCardNumber,userPassword)values(?,?,?,?,?)";
+                PreparedStatement prepareStatement1 = connection.prepareStatement(insertStatement);
+                prepareStatement1.setInt(1,pojo.getSiNo());
+                prepareStatement1.setInt(2,pojo.getNewLibraryCardNumber());
+                prepareStatement1.setString(3,pojo.getNewUserPassword());
+                prepareStatement1.setInt(4,pojo.getLibraryCardNumber());
+                prepareStatement1.setString(5,pojo.getUserPassword());
+                int rows = prepareStatement1.executeUpdate();
+                System.out.println("login"+rows);
+                return false;
+            }     
+
+        
+        case 2:
+        	
+        	pojo.setUser(libraryDetails.role());
+    		
+    		pojo.setLibraryCardNumber(libraryCardNumber);
+    		pojo.setPurpose(purpose);
+    		pojo.setBookCategory(bookCategory);
+    		pojo.setBookName(bookName);
+    		pojo.setNoOfBooksTaken(noOfBooksTaken);
+    		pojo.setNextBook(nextBook);
+    		System.out.println("Type of user:"+pojo.getUser());
+    		System.out.println("Library Card Number:"+pojo.getLibraryCardNumber());
+    		System.out.println("Purpose:"+pojo.getPurpose());
+    		System.out.println("Book Category:"+pojo.getBookCategory());
+    		System.out.println("Book Name:"+pojo.getBookName());
+    		System.out.println("No of Books Taken:"+pojo.getNoOfBooksTaken());
+    		System.out.println("NextBook:"+pojo.getNextBook());	
+      	    
+    		
+            pojo.setNewLibraryCardNumber(newLibraryCardNumber);
+            pojo.setNewUserPassword(newUserPassword);
+            pojo.setLibraryCardNumber(libraryCardNumber);
+            pojo.setUserPassword(userPassword);
+      	    String register="select newLibraryCardNumber from library";
+      	    PreparedStatement prepareStatement2=connection.prepareStatement(register);
+            ResultSet resultSet1= prepareStatement2.executeQuery();
+            while(resultSet1.next())
+            {
+          	  newLibraryCardNumber=resultSet1.getInt(1);
+          	  existingList.add(newLibraryCardNumber);
+            }
+            if(existingList.contains(pojo.getNewLibraryCardNumber()))
+          	  
+            {   	 
+          	System.out.println("Already registered");  
+          	  
+            }
+            else
+            {
+          	  String registerStatement="insert into library(siNo,newLibraryCardNumber,newUserPassword,libraryCardNumber,userPassword)values(?,?,?,?,?)";
+          	  PreparedStatement prepareStatement3=connection.prepareStatement(registerStatement);
+               
+               //prepareStatement3.setInt(1,pojo.getAge());
+                //prepareStatement3.setInt(2,pojo.getMembershipPackage());
+          	    prepareStatement3.setInt(1,pojo.getSiNo());
+                prepareStatement3.setInt(2,pojo.getNewLibraryCardNumber());
+                prepareStatement3.setString(3,pojo.getNewUserPassword());
+                prepareStatement3.setInt(4,pojo.getLibraryCardNumber());
+                prepareStatement3.setString(5,pojo.getUserPassword());
+                int rows = prepareStatement3.executeUpdate();
+                System.out.println("register"+rows);
+            }
+      	return false;
+        }
+		return false;
+
+	}
+//  public boolean update() throws ClassNotFoundException, SQLException {
+//	Connection connection = JdbcConnection.getConnection();
+//    System.out.println(connection);
+//    java.sql.Statement statement = connection.createStatement();
+//    String update = "update library set noOfBooksTaken=1 where libraryCardNumber=55612";
+//    statement.executeUpdate(update);
+//    System.out.println("Updated Successfully.");
+//    return false; //update
+//  }
+//  
+//  public boolean delete() throws ClassNotFoundException, SQLException {
+//	Connection connection = JdbcConnection.getConnection();
+//	System.out.println(connection);
+//    java.sql.Statement statement = connection.createStatement();
+//    String delete = "delete from library where noOfBooksTaken=4";
+//    statement.executeUpdate(delete);
+//    System.out.println("Deleted successfully.");
+//    return false;
+//  }
+	
+
   
-  public boolean delete() throws ClassNotFoundException, SQLException {
-	Connection connection = JdbcConnection.getConnection();
-	System.out.println(connection);
-    java.sql.Statement statement = connection.createStatement();
-    String delete = "delete from library where noOfBooksTaken=4";
-    statement.executeUpdate(delete);
-    System.out.println("Deleted successfully.");
-    return false;
-  }
+//      public boolean register() throws ClassNotFoundException, SQLException {
+//	  Connection connection = JdbcConnection.getConnection();
+//	  System.out.println(connection);
+//	  ArrayList existingList = new ArrayList();
+//	  pojo.setAge(age);
+//      pojo.setMembershipPackage(membershipPackage);
+//      pojo.setNewLibraryCardNumber(newLibraryCardNumber);
+//      pojo.setNewUserPassword(newUserPassword);
+//	  String register="select newLibraryCardNumber from libraryregister";
+//	  PreparedStatement prepareStatement=connection.prepareStatement(register);
+//      ResultSet resultSet = prepareStatement.executeQuery();
+//      while(resultSet.next())
+//      {
+//    	  newLibraryCardNumber=resultSet.getInt(1);
+//    	  existingList.add(newLibraryCardNumber);
+//      }
+//      if(existingList.contains(pojo.getNewLibraryCardNumber()))
+//    	  
+//      {   	 
+//    	System.out.println("Already registered");  
+//    	  
+//      }
+//      else
+//      {
+//    	  String registerStatement = "insert into libraryregister(age,membershipPackage,newLibraryCardNumber,newUserPassword)values(?,?,?,?)";
+//    	  PreparedStatement prepareStatement1 = connection.prepareStatement(registerStatement);
+//         
+//          prepareStatement1.setInt(1,pojo.getAge());
+//          prepareStatement1.setInt(2,pojo.getMembershipPackage());
+//          prepareStatement1.setInt(3,pojo.getNewLibraryCardNumber());
+//          prepareStatement1.setString(4,pojo.getNewUserPassword());
+//          int rows = prepareStatement1.executeUpdate();
+//          System.out.println("register"+rows);
+//      }
+//	return false;
+//  }
   
-      public boolean register() throws ClassNotFoundException, SQLException {
-	  Connection connection = JdbcConnection.getConnection();
-	  System.out.println(connection);
-	  ArrayList existingList = new ArrayList();
-	  pojo.setAge(age);
-      pojo.setMembershipPackage(membershipPackage);
-      pojo.setNewLibraryCardNumber(newLibraryCardNumber);
-      pojo.setNewUserPassword(newUserPassword);
-	  String register="select newLibraryCardNumber from libraryregister";
-	  PreparedStatement prepareStatement=connection.prepareStatement(register);
-      ResultSet resultSet = prepareStatement.executeQuery();
-      while(resultSet.next())
-      {
-    	  newLibraryCardNumber=resultSet.getInt(1);
-    	  existingList.add(newLibraryCardNumber);
-      }
-      if(existingList.contains(pojo.getNewLibraryCardNumber()))
-    	  
-      {   	 
-    	System.out.println("Already registered");  
-    	  
-      }
-      else
-      {
-    	  String registerStatement = "insert into libraryregister(age,membershipPackage,newLibraryCardNumber,newUserPassword)values(?,?,?,?)";
-    	  PreparedStatement prepareStatement1 = connection.prepareStatement(registerStatement);
-         
-          prepareStatement1.setInt(1,pojo.getAge());
-          prepareStatement1.setInt(2,pojo.getMembershipPackage());
-          prepareStatement1.setInt(3,pojo.getNewLibraryCardNumber());
-          prepareStatement1.setString(4,pojo.getNewUserPassword());
-          int rows = prepareStatement1.executeUpdate();
-          System.out.println("register"+rows);
-      }
-	return false;
-  }
+//	@Override
+//	public boolean retrive() throws ClassNotFoundException, SQLException {
+//		Connection connection = JdbcConnection.getConnection();
+//		System.out.println(connection);
+//		java.sql.Statement statement = connection.createStatement();
+//		
+//		return false;
+//	}
 }
 

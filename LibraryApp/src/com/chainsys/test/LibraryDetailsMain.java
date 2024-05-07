@@ -11,12 +11,12 @@ public class LibraryDetailsMain {
 		// TODO Auto-generated method stub
 	LibraryDetailsImplementation libraryDetails = new LibraryDetailsImplementation();
 	
-	libraryDetails.details();
-	libraryDetails.register();
+	//libraryDetails.details();
+	//libraryDetails.register();
 	libraryDetails.libraryLogin();
 	//libraryDetails.key();
 	
-	libraryDetails.update();
-	libraryDetails.delete();
+	//libraryDetails.update();
+	//libraryDetails.delete();
 }
 }
