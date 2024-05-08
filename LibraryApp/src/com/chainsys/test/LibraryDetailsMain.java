@@ -13,7 +13,7 @@ public class LibraryDetailsMain {
 	
 	//libraryDetails.details();
 	//libraryDetails.register();
-	libraryDetails.libraryLogin();
+	libraryDetails.enterType();
 	//libraryDetails.key();
 	
 	//libraryDetails.update();

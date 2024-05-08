@@ -2,13 +2,16 @@ package com.chainsys.model;
 
 public class LibraryDetailsPojo {
 	public int user;
+	public String userName;
     public int noOfBooksTaken;
     public int libraryCardNumber;
+    public int libraryCardNumber1;
     public String todayDate;
     public String category;
+    public String userPassword1;
     public String userPassword;
     public String bookName;
-    public int bookCategory;
+    public String bookCategory;
     public char nextBook;
     public int purpose;
     public String returnDate;
@@ -17,7 +20,33 @@ public class LibraryDetailsPojo {
     public int newLibraryCardNumber;
     public String newUserPassword;
     public int siNo;
+    public int fine;
     
+	
+	public int getFine() {
+		return fine;
+	}
+	public void setFine(int fine) {
+		this.fine = fine;
+	}
+	public int getLibraryCardNumber1() {
+		return libraryCardNumber1;
+	}
+	public void setLibraryCardNumber1(int libraryCardNumber1) {
+		this.libraryCardNumber1 = libraryCardNumber1;
+	}
+	public String getUserPassword1() {
+		return userPassword1;
+	}
+	public void setUserPassword1(String userPassword1) {
+		this.userPassword1 = userPassword1;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getSiNo() {
 		return siNo;
 	}
@@ -55,10 +84,10 @@ public class LibraryDetailsPojo {
 		this.category = category;
 	}
 	
-	public int getBookCategory() {
+	public String getBookCategory() {
 		return bookCategory;
 	}
-	public void setBookCategory(int bookCategory) {
+	public void setBookCategory(String bookCategory) {
 		this.bookCategory = bookCategory;
 	}
 	
@@ -123,14 +152,14 @@ public class LibraryDetailsPojo {
 	}
 	@Override
 	public String toString() {
-		return "LibraryDetailsPojo [user=" + user + ", noOfBooksTaken=" + noOfBooksTaken + ", libraryCardNumber="
-				+ libraryCardNumber + ", todayDate=" + todayDate + ", category=" + category + ", userPassword="
-				+ userPassword + ", bookName=" + bookName + ", bookCategory=" + bookCategory + ", nextBook=" + nextBook
-				+ ", purpose=" + purpose + ", returnDate=" + returnDate + ", age=" + age + ", membershipPackage="
-				+ membershipPackage + ", newLibraryCardNumber=" + newLibraryCardNumber + ", newUserPassword="
-				+ newUserPassword + ", siNo=" + siNo + "]";
+		return "LibraryDetailsPojo [user=" + user + ", userName=" + userName + ", noOfBooksTaken=" + noOfBooksTaken
+				+ ", libraryCardNumber=" + libraryCardNumber + ", libraryCardNumber1=" + libraryCardNumber1
+				+ ", todayDate=" + todayDate + ", category=" + category + ", userPassword1=" + userPassword1
+				+ ", userPassword=" + userPassword + ", bookName=" + bookName + ", bookCategory=" + bookCategory
+				+ ", nextBook=" + nextBook + ", purpose=" + purpose + ", returnDate=" + returnDate + ", age=" + age
+				+ ", membershipPackage=" + membershipPackage + ", newLibraryCardNumber=" + newLibraryCardNumber
+				+ ", newUserPassword=" + newUserPassword + ", siNo=" + siNo + ", fine=" + fine + "]";
 	}
-	
 	
 
 }
